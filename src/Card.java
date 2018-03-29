@@ -23,10 +23,7 @@ public class Card {
 	}
 
 	public boolean matches(Card otherCard) {
-		if (otherCard.suit() == this.suit() && otherCard.rank() == this.rank() && otherCard.pointValue == this.pointValue) {
-			return true;
-		}
-		return false;
+		return otherCard.suit() == this.suit() && otherCard.rank() == this.rank() && otherCard.pointValue == this.pointValue;
 	}
 
 	@Override
