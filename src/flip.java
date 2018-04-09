@@ -27,30 +27,15 @@ class Flip {
 	}
 
 	public static boolean arePermutation(int[] array1, int[] array2) {
-		int temp;
-    	for (int i = 0; i < array1.length - 1; i++) {
-        	if(array1[i] > array1[i + 1]) {
-            temp = array1[i];
-            array1[i] = array1[i + 1];
-            array1[i + 1] = temp;
-            i = -1;
-        	}
-    	}
-    	for (int i = 0; i < array2.length - 1; i++) {
-        	if(array2[i] > array2[i + 1]) {
-            temp = array2[i];
-            array2[i] = array2[i + 1];
-            array2[i + 1] = temp;
-            i = -1;
-        	}
-    	}
-    	int count = 0;
-    	for (int i = 0; i < array1.length; i++) {
-    		if (array1[i] == array2[i]) {
-    			count++;
-    		}
-    	}
-    	return count == array1.length;
+		int count = 0;
+		for (int j = 0; j < array1.length; j++) {
+			for (int k = 0; k < array2.length; k++) {
+				if (array1[j] == array2[k]) {
+					count++;
+				}
+			}
+		}
+		return count == array1.length;
 	}
 
 }

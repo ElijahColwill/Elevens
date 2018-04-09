@@ -64,8 +64,8 @@ public class Shuffler {
 	 */
 	public static void selectionShuffle(int[] values) {
 		int[] shuffled = new int[values.length];
+		Random random = new Random();
 		for (int k = values.length - 1; k > 0; k--) {
-			Random random = new Random();
 			int r = random.nextInt(k);
 			int temp = 0;
 			temp = values[k];
