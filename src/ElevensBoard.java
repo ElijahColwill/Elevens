@@ -53,7 +53,12 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		if (selectedCards.size() == 2) {
+			return containsPairSum11(selectedCards);
+		} else if (selectedCards.size() == 3) {
+			return containsJQK(selectedCards);
+		}
+		return false;
 	}
 
 	/**
@@ -66,7 +71,11 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean anotherPlayIsPossible() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		List<Integer> cIndexes = cardIndexes();
+		if (containsPairSum11(cIndexes) == false) {
+			return containsJQK(cIndexes);
+		}
+		return true;
 	}
 
 	/**
@@ -78,7 +87,17 @@ public class ElevensBoard extends Board {
 	 *              contain an 11-pair; false otherwise.
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		if (selectedCards.size() < 2) {
+			return false;
+		}
+		for (int i = 0; i < selectedCards.size() - 1; i++) {
+			for (int j = i; j < selectedCards.size(); j++) {
+				if (j != i && cardAt(selectedCards.get(i)).pointValue() + cardAt(selectedCards.get(j)).pointValue() == 11) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -90,6 +109,26 @@ public class ElevensBoard extends Board {
 	 *              include a jack, a queen, and a king; false otherwise.
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		if (selectedCards.size() < 3) {
+			return false;
+		}
+		boolean containsK = false;
+		boolean containsQ = false;
+		boolean containsJ = false;
+		for (int i = 0; i < selectedCards.size(); i++) {
+			if (cardAt(selectedCards.get(i)).pointValue() == 0) {
+				if (cardAt(selectedCards.get(i)).rank() ==  "king") {
+					containsK = true;
+				}
+				if (cardAt(selectedCards.get(i)).rank() == "queen") {
+					containsQ = true;
+				}
+				if (cardAt(selectedCards.get(i)).rank() ==  "jack") {
+					containsJ = true;
+				}
+			}
+		}
+		return containsJ && containsQ && containsK;
+
 	}
 }
