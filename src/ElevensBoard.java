@@ -97,8 +97,8 @@ public class ElevensBoard extends Board {
 			for (int sk2 = sk1 + 1; sk2 < selectedCards.size(); sk2++) {
 				int k2 = selectedCards.get(sk2).intValue();
 				if (cardAt(k1).pointValue() + cardAt(k2).pointValue() == 11) {
-					indexes[0] = sk1;
-					indexes[1] = sk2;
+					indexes[0] = k1;
+					indexes[1] = k2;
 					return indexes;
 				}
 			}
@@ -118,6 +118,7 @@ public class ElevensBoard extends Board {
 	private int[] findJQK(List<Integer> selectedCards) {
 		/* *** TO BE CHANGED INTO findJQK IN ACTIVITY 11 *** */
 		int[] indexes = new int[3];
+		indexes[0] = -1;		
 		for (Integer kObj : selectedCards) {
 			int k = kObj.intValue();
 			if (cardAt(k).rank().equals("jack")) {
@@ -128,12 +129,6 @@ public class ElevensBoard extends Board {
 				indexes[2] = k;
 			}
 		}
-		if (indexes[0] > 0) {
-			return indexes;
-		}
-		indexes[0] = -1;
-		indexes[1] = -1;
-		indexes[2] = -1;
 		return indexes;
 	}
 
@@ -160,13 +155,8 @@ public class ElevensBoard extends Board {
     		indexList.add(i);
 		}
 		if (indexes[0] != -1) {
-			if (size() > 8) {
 			replaceSelectedCards(indexList);
 			return true;	
-			} else if (size() <= 8 ) {
-				deal(indexList.get(0));
-				deal(indexList.get(1));
-			}
 		}
 		return false;
 	}
@@ -186,14 +176,8 @@ public class ElevensBoard extends Board {
     		indexList.add(i);
 		}
 		if (indexes[0] != -1) {
-			if (size() > 8) {
 			replaceSelectedCards(indexList);
 			return true;	
-			} else if (size() <= 8) {
-				deal(indexList.get(0));
-				deal(indexList.get(1));
-				deal(indexList.get(2));
-			}
 		}
 		return false;
 	}
